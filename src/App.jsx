@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <h1>Hello Memory Card</h1>
-      <h2>Git workflow test</h2>
+      <h2>Create local git branch: localwork</h2>
     </>
   );
 }
