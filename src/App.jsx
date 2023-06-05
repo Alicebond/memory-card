@@ -1,11 +1,17 @@
 // import { useState } from 'react'
 import "./App.css";
+import Card from "./Card";
+import Header from "./Header";
 
 function App() {
+  const cards = [];
+  for (let i = 0; i < 16; i++) {
+    cards.push(<Card number={i + 1} />);
+  }
   return (
     <>
-      <h1>Hello Memory Card</h1>
-      <h2>Create local git branch: localwork</h2>
+      <Header />
+      <div className="cards">{cards}</div>
     </>
   );
 }

@@ -2,5 +2,27 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-right {
+  margin-right: 2rem;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px red solid;
   text-align: center;
+  flex: 0 220px;
 }
