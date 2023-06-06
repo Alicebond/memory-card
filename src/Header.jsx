@@ -9,7 +9,7 @@ export default function Header(props) {
         </p>
       </div>
       <div className="header-right">
-        <p>Score: 2</p>
+        <p>Score: {props.score}</p>
         <p>Best score: 99</p>
       </div>
     </header>
