@@ -8,7 +8,14 @@ function App() {
   const [score, setScore] = useState(1);
   const cards = [];
   for (let i = 0; i < 16; i++) {
-    cards.push(<Card number={i + 1} key={uuidv4()} id={uuidv4()} />);
+    cards.push(
+      <Card
+        number={i + 1}
+        key={uuidv4()}
+        id={uuidv4()}
+        onClick={() => setScore((prevScore) => prevScore + 1)}
+      />
+    );
   }
   return (
     <>
