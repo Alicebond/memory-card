@@ -5,16 +5,29 @@ import Card from "./Card";
 import Header from "./Header";
 
 function App() {
-  const [score, setScore] = useState(1);
+  const [score, setScore] = useState(0);
+  const [cardState, setCardState] = useState({});
+
+  function handleClick() {
+    if (cardState.isClicked) {
+      setScore(0);
+      setCardState((prevState) => ({
+        ...prevState,
+        isClicked: !prevState.isClicked,
+      }));
+    } else {
+      setCardState((prevState) => ({
+        ...prevState,
+        isClicked: true,
+      }));
+      setScore((prevScore) => prevScore + 1);
+    }
+  }
+
   const cards = [];
   for (let i = 0; i < 16; i++) {
     cards.push(
-      <Card
-        number={i + 1}
-        key={uuidv4()}
-        id={uuidv4()}
-        onClick={() => setScore((prevScore) => prevScore + 1)}
-      />
+      <Card number={i + 1} key={uuidv4()} id={uuidv4()} onClick={handleClick} />
     );
   }
   return (
