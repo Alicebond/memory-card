@@ -32,20 +32,6 @@ function App() {
         }
       })
     })
-
-    if (cardsState.isClicked) {
-      setScore(0);
-      setCardsState((prevState) => ({
-        ...prevState,
-        isClicked: !prevState.isClicked,
-      }));
-    } else {
-      setCardsState((prevState) => ({
-        ...prevState,
-        isClicked: true,
-      }));
-      setScore((prevScore) => prevScore + 1);
-    }
   }
 
   const cards = cardsData.map((item, index)=> (
