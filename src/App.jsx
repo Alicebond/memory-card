@@ -5,18 +5,42 @@ import Card from "./Card";
 import Header from "./Header";
 
 function App() {
+  const cardsData = [];
+  for (let i = 0; i < 16; i++) {
+    cardsId.push({id: uuidv4()});
+  }
   const [score, setScore] = useState(0);
-  const [cardState, setCardState] = useState({});
+  const [cardsState, setCardsState] = useState(cardsData);
 
-  function handleClick() {
-    if (cardState.isClicked) {
+  function handleClick(id) {
+    setCardsState((prev) => {
+      return prev.map(i => {
+        if(i.id === id) {
+          if (i.isClicked) {
+            setScore(0);
+            return {
+              ...i,
+              isClicked: !prevState.isClicked,
+            } 
+          } else {
+            setScore((prevScore) => prevScore + 1)
+            return {
+              ...i,
+              isClicked: true,
+            }
+          }
+        }
+      })
+    })
+
+    if (cardsState.isClicked) {
       setScore(0);
-      setCardState((prevState) => ({
+      setCardsState((prevState) => ({
         ...prevState,
         isClicked: !prevState.isClicked,
       }));
     } else {
-      setCardState((prevState) => ({
+      setCardsState((prevState) => ({
         ...prevState,
         isClicked: true,
       }));
@@ -24,12 +48,10 @@ function App() {
     }
   }
 
-  const cards = [];
-  for (let i = 0; i < 16; i++) {
-    cards.push(
-      <Card number={i + 1} key={uuidv4()} id={uuidv4()} onClick={handleClick} />
-    );
-  }
+  const cards = cardsData.map((item, index)=> (
+    <Card number={i + 1} key={index} id={item.id} onClick={() => handleClick(item.id)} />
+  ));
+
   return (
     <>
       <Header score={score} />
