@@ -7,36 +7,44 @@ import Header from "./Header";
 function App() {
   const cardsData = [];
   for (let i = 0; i < 16; i++) {
-    cardsId.push({id: uuidv4()});
+    cardsData.push({ id: uuidv4() });
   }
   const [score, setScore] = useState(0);
   const [cardsState, setCardsState] = useState(cardsData);
 
   function handleClick(id) {
-    setCardsState((prev) => {
-      return prev.map(i => {
-        if(i.id === id) {
+    setCardsState((prev) =>
+      prev.map((i) => {
+        console.log(i);
+        if (i.id === id) {
           if (i.isClicked) {
             setScore(0);
             return {
               ...i,
-              isClicked: !prevState.isClicked,
-            } 
+              isClicked: !i.isClicked,
+            };
           } else {
-            setScore((prevScore) => prevScore + 1)
+            setScore((prevScore) => prevScore + 1);
             return {
               ...i,
               isClicked: true,
-            }
+            };
           }
         }
       })
-    })
+    );
   }
 
-  const cards = cardsData.map((item, index)=> (
-    <Card number={i + 1} key={index} id={item.id} onClick={() => handleClick(item.id)} />
-  ));
+  const cards = cardsData.map((item, index) => {
+    return (
+      <Card
+        number={index + 1}
+        key={index}
+        id={item.id}
+        onClick={() => handleClick(item.id)}
+      />
+    );
+  });
 
   return (
     <>
