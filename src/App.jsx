@@ -15,7 +15,6 @@ function App() {
   function handleClick(id) {
     setCardsState((prev) =>
       prev.map((i) => {
-        console.log(i);
         if (i.id === id) {
           if (i.isClicked) {
             setScore(0);
@@ -30,12 +29,14 @@ function App() {
               isClicked: true,
             };
           }
+        } else {
+          return i;
         }
       })
     );
   }
 
-  const cards = cardsData.map((item, index) => {
+  const cards = cardsState.map((item, index) => {
     return (
       <Card
         number={index + 1}
