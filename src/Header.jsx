@@ -10,7 +10,7 @@ export default function Header(props) {
       </div>
       <div className="header-right">
         <p>Score: {props.score}</p>
-        <p>Best score: 99</p>
+        <p>Best score: {props.bestScore}</p>
       </div>
     </header>
   );

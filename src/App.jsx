@@ -10,7 +10,21 @@ function App() {
     cardsData.push({ id: uuidv4(), num: i + 1 });
   }
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0)
   const [cardsState, setCardsState] = useState(cardsData);
+
+  function shuffleCards() {
+    let currentIndex = cardsData.length - 1, randomIndex;
+    while(currentIndex >= 0) {
+      rendomIndex = Math.floor(Math.random() + currentIndex);
+      currentIndex--;
+      [cardsData[currentIndex], cardsData[randomIndex]] = [cardsData[randomIndex], cardsData[currentIndex]];
+    }
+  }
+
+  function updateBestScore() {
+    if(score > bestScore) setBestScore(score);
+  }
 
   function handleClick(id) {
     setCardsState((prev) =>
@@ -18,12 +32,14 @@ function App() {
         if (i.id === id) {
           if (i.isClicked) {
             setScore(0);
+            shuffleCards()
             return {
               ...i,
               isClicked: !i.isClicked,
             };
           } else {
             setScore((prevScore) => prevScore + 1);
+            updateBestScore()
             return {
               ...i,
               isClicked: true,
@@ -49,7 +65,7 @@ function App() {
 
   return (
     <>
-      <Header score={score} />
+      <Header score={score} bestScore={bestScore} />
       <div className="cards">{cards}</div>
     </>
   );
