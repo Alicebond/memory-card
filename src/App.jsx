@@ -7,7 +7,7 @@ import Header from "./Header";
 function App() {
   const cardsData = [];
   for (let i = 0; i < 16; i++) {
-    cardsData.push({ id: uuidv4() });
+    cardsData.push({ id: uuidv4(), num: i + 1 });
   }
   const [score, setScore] = useState(0);
   const [cardsState, setCardsState] = useState(cardsData);
@@ -39,7 +39,7 @@ function App() {
   const cards = cardsState.map((item, index) => {
     return (
       <Card
-        number={index + 1}
+        number={item.num}
         key={index}
         id={item.id}
         onClick={() => handleClick(item.id)}
