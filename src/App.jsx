@@ -1,59 +1,57 @@
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+// import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import { useState } from "react";
 import "./App.css";
 import Card from "./Card";
 import Header from "./Header";
+import data from "./data";
 
 function App() {
-  const cardsData = [];
-  for (let i = 0; i < 16; i++) {
-    cardsData.push({ id: uuidv4(), num: i + 1 });
-  }
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cardsState, setCardsState] = useState(cardsData);
+  const [cardsState, setCardsState] = useState(data);
 
-  function shuffleCards() {
-    let currentIndex = cardsData.length - 1,
+  function shuffleCards(array) {
+    let currentIndex = array.length - 1,
       randomIndex;
     while (currentIndex >= 0) {
       randomIndex = Math.floor(Math.random() + currentIndex);
       currentIndex--;
-      [cardsData[currentIndex], cardsData[randomIndex]] = [
-        cardsData[randomIndex],
-        cardsData[currentIndex],
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
       ];
     }
+    return array;
   }
 
   function updateBestScore() {
-    if (score > bestScore) setBestScore(score);
+    if (score >= bestScore) setBestScore(score);
   }
 
   function handleClick(id) {
     setCardsState((prev) =>
       prev.map((i) => {
         if (i.id === id) {
-          if (i.isClicked) {
-            setScore(0);
-            shuffleCards();
-            return {
-              ...i,
-              isClicked: !i.isClicked,
-            };
-          } else {
+          if (i.clickTime === 0) {
             setScore((prevScore) => prevScore + 1);
-            updateBestScore();
             return {
               ...i,
-              isClicked: true,
+              clickTime: i.clickTime++,
             };
-          }
-        } else {
-          return i;
-        }
+          } else return i;
+        } else return i;
       })
     );
+
+    cardsState.forEach((i) => {
+      if (i.id === id) {
+        if (i.clickTime === 2) {
+          updateBestScore();
+          setScore(0);
+          setCardsState(shuffleCards(data));
+        }
+      }
+    });
   }
 
   const cards = cardsState.map((item, index) => {
