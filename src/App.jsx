@@ -13,8 +13,8 @@ function App() {
   function shuffleCards(array) {
     let currentIndex = array.length - 1,
       randomIndex;
-    while (currentIndex >= 0) {
-      randomIndex = Math.floor(Math.random() + currentIndex);
+    while (currentIndex > 0) {
+      randomIndex = Math.floor(Math.random() * (currentIndex + 1));
       currentIndex--;
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex],
@@ -26,32 +26,27 @@ function App() {
 
   function updateBestScore() {
     if (score >= bestScore) setBestScore(score);
+    setCardsState(shuffleCards(data));
   }
 
   function handleClick(id) {
     setCardsState((prev) =>
       prev.map((i) => {
         if (i.id === id) {
-          if (i.clickTime === 0) {
+          if (!i.isClicked) {
             setScore((prevScore) => prevScore + 1);
             return {
               ...i,
-              clickTime: i.clickTime++,
+              isClicked: !i.isClicked,
             };
-          } else return i;
+          } else {
+            updateBestScore();
+            setScore(0);
+            return i;
+          }
         } else return i;
       })
     );
-
-    cardsState.forEach((i) => {
-      if (i.id === id) {
-        if (i.clickTime === 2) {
-          updateBestScore();
-          setScore(0);
-          setCardsState(shuffleCards(data));
-        }
-      }
-    });
   }
 
   const cards = cardsState.map((item, index) => {
