@@ -8,7 +8,7 @@ import data from "./data";
 function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cardsState, setCardsState] = useState(data);
+  const [cardsState, setCardsState] = useState(shuffleCards(data));
 
   function shuffleCards(array) {
     let currentIndex = array.length - 1,
@@ -56,6 +56,9 @@ function App() {
         key={index}
         id={item.id}
         onClick={() => handleClick(item.id)}
+        image={item.image}
+        name={item.name}
+        alt={item.alt}
       />
     );
   });

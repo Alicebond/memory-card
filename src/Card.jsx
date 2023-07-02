@@ -1,7 +1,8 @@
 export default function Card(props) {
   return (
     <div className="card" onClick={props.onClick}>
-      {props.number || "A card"}
+      <img src={props.image} alt={props.alt} />
+      <p className="name">{props.name}</p>
     </div>
   );
 }
