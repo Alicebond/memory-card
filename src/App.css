@@ -1,6 +1,6 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem;
 }
 
@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .header-right {
@@ -22,8 +23,11 @@
 }
 
 .card {
-  border: 1px red solid;
   text-align: center;
   flex: 0 220px;
   cursor: pointer;
+}
+
+.name {
+  margin: 0;
 }
