@@ -67,6 +67,18 @@ function App() {
     <>
       <Header score={score} bestScore={bestScore} />
       <div className="cards">{cards}</div>
+      <footer className="footer">
+        <p>
+          All images are from{" "}
+          <a
+            href={
+              "https://southpark.fandom.com/wiki/Portal:Characters/Major_Characters"
+            }
+          >
+            here
+          </a>
+        </p>
+      </footer>
     </>
   );
 }
