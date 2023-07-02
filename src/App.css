@@ -1,6 +1,6 @@
 #root {
   max-width: 1280px;
-  margin: 0;
+  margin: 0 auto;
   padding: 2rem;
 }
 
@@ -20,6 +20,7 @@
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 2em;
 }
 
 .card {
@@ -28,6 +29,12 @@
   cursor: pointer;
 }
 
-.name {
+.name,
+.footer > p {
   margin: 0;
+}
+
+.footer {
+  margin: 2em auto 0;
+  text-align: center;
 }
