@@ -26,10 +26,9 @@ function App() {
 
   function updateBestScore() {
     if (score >= bestScore) setBestScore(score);
-    setCardsState(shuffleCards(data));
   }
 
-  function handleClick(id) {
+  function updateClickState(id) {
     setCardsState((prev) =>
       prev.map((i) => {
         if (i.id === id) {
@@ -42,11 +41,20 @@ function App() {
           } else {
             updateBestScore();
             setScore(0);
-            return i;
+            return {
+              ...i,
+              isClicked: !i.isClicked,
+            };
           }
         } else return i;
       })
     );
+  }
+
+  function handleClick(id) {
+    setCardsState((prevCards) => shuffleCards(prevCards));
+
+    updateClickState(id);
   }
 
   const cards = cardsState.map((item, index) => {
