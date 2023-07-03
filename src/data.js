@@ -37,7 +37,8 @@ const images = [
 function getCorrectName(str) {
   let subString = str.substring(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
   subString = subString.replace(/([A-Z])/g, " $1").trim();
-  return subString;
+
+  return subString.split("-")[0];
 }
 const cardsData = [];
 for (let i = 0; i < images.length; i++) {
